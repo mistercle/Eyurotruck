@@ -1,53 +1,15 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-
-class CounterButton extends React.Component
-{
-  static defaultProps = {
-    counter : -1,
-  };
-  
-  constructor(props)
-  {
-    super(props);
-
-    this.state= {
-      counter : props.counter,
-    }
-  }
-  state = {
-    counter : 0,
-  };
-
-  clickHandler = () => {
-    this.setState({
-      counter : this.state.counter + 1,
-    });
-  };
-
-  render()
-  {
-    return (
-      <View style={styles.buttonContainer}>
-        <Text style={[styles.textBig, styles.textRed]}>Hello, World!</Text>
-        <Text>{this.state.counter}</Text>
-        <Button title={'click me!'}onPress={this.clickHandler}></Button>
-      </View>
-    );
-  }
-}
-
 export default class App extends React.Component 
 {
   render() 
   {
     return (
       <View style={styles.container}>
-        <CounterButton counter = {0}/>
-        <CounterButton count = {1}/>
-        <CounterButton counter = {2}/>
-        <CounterButton counter = {3}/>
+        <Text>1</Text>
+        <Text>2</Text>
+        <Text>3</Text>
       </View>
     );
   }
@@ -60,13 +22,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  textBig:{
-    fontSize : 32,
-  },
-  textRed:{
-    color : 'red'
-  },
-  buttonContainer:{
-    width : '100%',
-  }
+  
 });
