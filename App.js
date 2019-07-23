@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style = {[styles.textBig, styles.textRed]}>Hello world!</Text>
+      <Text style={[styles.textBig, styles.textRed]}>Hello, World!</Text>
+      <Button title={'click me!'}onPress={()=>console.log('clicked!')}></Button>
     </View>
   );
 }
