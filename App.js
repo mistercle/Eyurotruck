@@ -1,13 +1,18 @@
 import React from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={[styles.textBig, styles.textRed]}>Hello, World!</Text>
-      <Button title={'click me!'}onPress={()=>console.log('clicked!')}></Button>
-    </View>
-  );
+
+export default class App extends React.Component{
+  clickHandler = () => console.log("clicked!")
+  render()
+  {
+    return (
+      <View style={styles.container}>
+        <Text style={[styles.textBig, styles.textRed]}>Hello, World!</Text>
+        <Button title={'click me!'}onPress={this.clickHandler}></Button>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
