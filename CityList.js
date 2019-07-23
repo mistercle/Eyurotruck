@@ -4,6 +4,10 @@ import { Constants } from 'expo'
 
 export default class CityList extends React.Component
 {
+    static navigationOptions = {
+        title : 'Cities',
+    };
+    
     constructor(props) 
     {
         super(props);
