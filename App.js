@@ -4,6 +4,14 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 class CounterButton extends React.Component
 {
+  constructor(props)
+  {
+    super(props);
+
+    this.state= {
+      counter : props.counter,
+    }
+  }
   state = {
     counter : 0,
   };
@@ -32,10 +40,10 @@ export default class App extends React.Component
   {
     return (
       <View style={styles.container}>
-        <CounterButton />
-        <CounterButton />
-        <CounterButton />
-        <CounterButton />
+        <CounterButton counter = {0}/>
+        <CounterButton counter = {1}/>
+        <CounterButton counter = {2}/>
+        <CounterButton counter = {3}/>
       </View>
     );
   }
