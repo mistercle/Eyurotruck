@@ -33,6 +33,9 @@ export default class App extends React.Component
     return (
       <View style={styles.container}>
         <CounterButton />
+        <CounterButton />
+        <CounterButton />
+        <CounterButton />
       </View>
     );
   }
