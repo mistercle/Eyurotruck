@@ -37,34 +37,71 @@ export default class WeatherDetailScreen extends React.Component {
       if(this.state.isLoading)
       {
         return (
-            <View style={styles.container}>
+            <View style={styles.loadingContainer}>
                 <Text style = {styles.text}>데이터를 불러오는 중입니다.</Text>
             </View>
         );
       }
 
       let celsius = this.state.main.temp - 273.15;
-
+      
       return(
-          <View style= {styles.container}>
-              <Image style = {{height : '30%', width : '30%'}} source = {require('./assets/sun.png')}/>
-              <Text style = {styles.test}>온도 : {celsius.toFixed(1)}</Text>
+        <View style = {styles.container}>
+          <View style = {styles.firstContainer}>
+              <Text style = {styles.firstText}> 햇빛 볼 시간입니다! 나갈 준비 하세요!</Text>
+          </View> 
+          <View style= {styles.ImageContainer}>
+              <Image style = {styles.imageStyle} source = {require('./assets/sun.png')}/>
           </View>
+          <View style = {styles.textContainer}>
+             <Text style = {styles.celsiusText}>온도 : {celsius.toFixed(1)}</Text>
+          </View>
+        </View>
       )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+
+  container : {
+    flex : 1,
+    backgroundColor : '#fff',
+    marginTop : Constants.statusBarHeight
+  },
+
+
+  firstContainer : {
+    flex : 1,
+    backgroundColor : '#fff',
+    marginTop :  Constants.statusBarHeight,
+  },
+
+
+  ImageContainer: {
+    flex: 2,
     backgroundColor: '#fff',
-    marginTop: Constants.statusBarHeight,
+    
 
     
   },
-  text :{
+  textContainer : {
+    flex : 2,
+    backgroundColor: '#fff',
+  },
+
+  firstContainer : {
+    fontSize : 50,
+    textAlign : 'center'
+  },
+
+  celsiusText :{
     fontSize : 20,
     textAlign: 'center',
+  },
+
+  imageStyle : {
+    width : 100,
+    height : 100,
   },
 
   loadingContainer: {
@@ -72,6 +109,5 @@ const styles = StyleSheet.create({
     backgroundColor : '#fff',
     marginTop: Constants.statusBarHeight,
 
-    textAlign : 'center'
   }
 });
