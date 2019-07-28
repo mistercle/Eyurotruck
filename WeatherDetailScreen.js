@@ -20,7 +20,7 @@ export default class WeatherDetailScreen extends React.Component {
 
   componentDidMount() {
     const { navigation } = this.props;
-    // const city = navigation.getParam('city', null);
+    //const city = navigation.getParam('city', null);
     const city = 'Daejeon';
 
     fetch(`http://demo6468405.mockable.io/weather-crawlers/current-weathers/by-city-name/${city}`)
@@ -34,6 +34,10 @@ export default class WeatherDetailScreen extends React.Component {
   }
 
   render() {
+
+      
+
+
       if(this.state.isLoading)
       {
         return (
@@ -54,7 +58,12 @@ export default class WeatherDetailScreen extends React.Component {
               <Image style = {styles.imageStyle} source = {require('./assets/sun.png')}/>
           </View>
           <View style = {styles.textContainer}>
-             <Text style = {styles.celsiusText}>온도 : {celsius.toFixed(1)}</Text>
+            <Text style = {styles.celsiusText}>
+               온도 : {celsius.toFixed(1)}{'\n'}
+               기압 : {this.state.main.pressure}{'\n'}
+               습도 : {this.state.main.humidity}{'\n'}
+               풍속 : {this.state.wind.speed}{'\n'}
+            </Text>
           </View>
         </View>
       )
@@ -66,32 +75,41 @@ const styles = StyleSheet.create({
   container : {
     flex : 1,
     backgroundColor : '#fff',
-    marginTop : Constants.statusBarHeight
+    //marginTop : Constants.statusBarHeight
   },
 
 
   firstContainer : {
     flex : 1,
     backgroundColor : '#fff',
-    marginTop :  Constants.statusBarHeight,
   },
 
 
   ImageContainer: {
     flex: 2,
     backgroundColor: '#fff',
+    alignItems : 'center',
+
     
+    borderColor: 'red',
+    borderWidth: 2,
 
     
   },
   textContainer : {
     flex : 2,
     backgroundColor: '#fff',
+    
+    borderColor: 'blue',
+    borderWidth: 2,
   },
 
-  firstContainer : {
-    fontSize : 50,
-    textAlign : 'center'
+  firstText : {
+    fontSize : 20,
+    textAlign : 'center',
+    
+    borderColor: 'black',
+    borderWidth: 2,
   },
 
   celsiusText :{
@@ -100,8 +118,8 @@ const styles = StyleSheet.create({
   },
 
   imageStyle : {
-    width : 100,
-    height : 100,
+    width : 140,
+    height : 140,
   },
 
   loadingContainer: {
