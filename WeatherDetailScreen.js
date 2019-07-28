@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native';
 import { Constants } from 'expo';
+import Clock from 'react-live-clock'
 
 export default class WeatherDetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -50,22 +51,26 @@ export default class WeatherDetailScreen extends React.Component {
       let celsius = this.state.main.temp - 273.15;
       
       return(
-        <View style = {styles.container}>
+        
+        <ImageBackground source = {require('./assets/day.jpg')} style={{width: '100%', height: '100%'}}>
           <View style = {styles.firstContainer}>
               <Text style = {styles.firstText}> 햇빛 볼 시간입니다! 나갈 준비 하세요!</Text>
           </View> 
-          <View style= {styles.ImageContainer}>
+          <View style= {styles.mainContainer}>
+            <View style = {styles.iconContainer}>
               <Image style = {styles.imageStyle} source = {require('./assets/sun.png')}/>
+              <Text style = {styles.iconText}>맑음</Text>
+            </View>
+            <View style = {styles.tempContainer}>
+              <Text style = {styles.celsiusText}>{celsius.toFixed(1)}C</Text>
+            </View>
           </View>
-          <View style = {styles.textContainer}>
+          <View style = {styles.subContainer}>
             <Text style = {styles.celsiusText}>
-               온도 : {celsius.toFixed(1)}{'\n'}
-               기압 : {this.state.main.pressure}{'\n'}
-               습도 : {this.state.main.humidity}{'\n'}
-               풍속 : {this.state.wind.speed}{'\n'}
             </Text>
           </View>
-        </View>
+        </ImageBackground>
+        
       )
   }
 }
@@ -85,8 +90,9 @@ const styles = StyleSheet.create({
   },
 
 
-  ImageContainer: {
+  mainContainer: {
     flex: 2,
+    flexDirection : "row",
     backgroundColor: '#fff',
     alignItems : 'center',
 
@@ -96,13 +102,33 @@ const styles = StyleSheet.create({
 
     
   },
-  textContainer : {
+
+  iconContainer : {
+    flex : 1,
+    alignItems : 'center',
+    
+    borderColor: 'red',
+    borderWidth: 2,
+  },
+
+  tempContainer : {
+    flex : 1,
+
+    borderColor: 'red',
+    borderWidth: 2,
+  },
+  
+  
+  lastContainer : {
     flex : 2,
+    flexDirection : 'row',
     backgroundColor: '#fff',
     
+
     borderColor: 'blue',
     borderWidth: 2,
   },
+
 
   firstText : {
     fontSize : 20,
@@ -112,8 +138,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 
+  iconText : {
+    fontSize : 25,
+    textAlign : 'center',
+
+    
+  },
+
   celsiusText :{
-    fontSize : 20,
+    fontSize : 40,
     textAlign: 'center',
   },
 
