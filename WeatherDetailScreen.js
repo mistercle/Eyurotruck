@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { Constants } from 'expo';
 
 export default class WeatherDetailScreen extends React.Component {
@@ -38,7 +38,7 @@ export default class WeatherDetailScreen extends React.Component {
       {
         return (
             <View style={styles.container}>
-                <Text>데이터를 불러오는 중입니다.</Text>
+                <Text style = {styles.text}>데이터를 불러오는 중입니다.</Text>
             </View>
         );
       }
@@ -47,7 +47,8 @@ export default class WeatherDetailScreen extends React.Component {
 
       return(
           <View style= {styles.container}>
-              <Text>온도 : {celsius.toFixed(1)}</Text>
+              <Image style = {{height : '30%', width : '30%'}} source = {require('./assets/sun.png')}/>
+              <Text style = {styles.test}>온도 : {celsius.toFixed(1)}</Text>
           </View>
       )
   }
@@ -58,5 +59,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     marginTop: Constants.statusBarHeight,
+
+    
   },
+  text :{
+    fontSize : 20,
+    textAlign: 'center',
+  },
+
+  loadingContainer: {
+    flex : 1,
+    backgroundColor : '#fff',
+    marginTop: Constants.statusBarHeight,
+
+    textAlign : 'center'
+  }
 });
