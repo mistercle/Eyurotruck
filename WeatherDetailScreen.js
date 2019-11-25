@@ -6,7 +6,7 @@ import Clock from 'react-live-clock'
 export default class WeatherDetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
       return {
-          title : `Weather Info: ${navigation.getParam('city', 'Unknown')}`,
+          title : `날씨정보 : ${navigation.getParam('city', 'Unknown')}`,
       }
   }
 
@@ -34,10 +34,12 @@ export default class WeatherDetailScreen extends React.Component {
       });
   }
 
+  
+
   render() {
 
       
-
+      
 
       if(this.state.isLoading)
       {
@@ -49,12 +51,22 @@ export default class WeatherDetailScreen extends React.Component {
       }
 
       let celsius = this.state.main.temp - 273.15;
+      let celsius_min = this.state.main.temp_min - 273.15;
+      let celsius_max = this.state.main.temp_max - 273.15;
+
+
+
+      let sunString = "햇빛 볼 시간입니다!\n 나갈 준비 하세요!"
+      let rainString = "구름이 울고 있네요.\n 막아줄 우산을 준비하세요."
+
+      let background = './assets/night.jpg'
       
       return(
         
-        <ImageBackground source = {require('./assets/day.jpg')} style={{width: '100%', height: '100%'}}>
+        <ImageBackground source = {require(background)} resizeMode = 'cover' style={styles.backGroudStyle}>
+          
           <View style = {styles.firstContainer}>
-              <Text style = {styles.firstText}> 햇빛 볼 시간입니다! 나갈 준비 하세요!</Text>
+              <Text style = {styles.firstText}>{'\n'}{sunString}</Text>
           </View> 
           <View style= {styles.mainContainer}>
             <View style = {styles.iconContainer}>
@@ -63,12 +75,28 @@ export default class WeatherDetailScreen extends React.Component {
             </View>
             <View style = {styles.tempContainer}>
               <Text style = {styles.celsiusText}>{celsius.toFixed(1)}C</Text>
+              <Text style = {styles.celsiusSubText}>최저 {celsius_min.toFixed(1)}C 최고 {celsius_max.toFixed(1)}C</Text>
+              
             </View>
           </View>
-          <View style = {styles.subContainer}>
-            <Text style = {styles.celsiusText}>
-            </Text>
+          <View style = {styles.lastContainer}>
+            <View style = {styles.subContainer}>
+              <Image style = {{width : 50, height : 50}} source = {require('./assets/wind.png')}/>
+              <Text style = {{fontSize : 35}}>{this.state.wind.speed}노트</Text>
+              <Text style = {{fontSize : 25}}>풍속</Text>
+            </View>
+            <View style = {styles.subContainer}>
+              <Image style = {{width : 50, height : 50}} source = {require('./assets/drop.png')}/>
+              <Text style = {{fontSize : 35}}>{this.state.main.humidity}</Text>
+              <Text style = {{fontSize : 25}}>습도</Text>
+            </View>
+            <View style = {styles.subContainer}>
+              <Image style = {{width : 50, height : 50}} source = {require('./assets/cloud.png')}/>
+              <Text style = {{fontSize : 35}}>{this.state.clouds.all}</Text>
+              <Text style = {{fontSize : 25}}>구름</Text>
+            </View>
           </View>
+          
         </ImageBackground>
         
       )
@@ -83,6 +111,12 @@ const styles = StyleSheet.create({
     //marginTop : Constants.statusBarHeight
   },
 
+  backGroudStyle : {
+    
+    width : '100%',
+    height : '100%',
+   
+  },
 
   firstContainer : {
     flex : 1,
@@ -129,9 +163,18 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
 
+  subContainer : {
+    flex : 1,
+    backgroundColor: '#fff',
+    alignItems : 'center',
+
+    borderColor: 'blue',
+    borderWidth: 2,
+  },
+  
 
   firstText : {
-    fontSize : 20,
+    fontSize : 30,
     textAlign : 'center',
     
     borderColor: 'black',
@@ -146,8 +189,13 @@ const styles = StyleSheet.create({
   },
 
   celsiusText :{
-    fontSize : 40,
+    fontSize : 60,
     textAlign: 'center',
+  },
+
+  celsiusSubText : {
+    fontSize : 20,
+    textAlign : 'center'
   },
 
   imageStyle : {
