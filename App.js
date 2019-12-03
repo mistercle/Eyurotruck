@@ -1,60 +1,34 @@
 import React from 'react';
 //import CityList from './CityList'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator, createAppContainer, TabRouter } from 'react-navigation'
 //import WeatherDetailScreen from './WeatherDetailScreen'
-//import Loginpage from './Loginpage';
-//import Mainpage from './Mainpage';
-/*
-const AppNavigator = createStackNavigator(
-    {
-      CityList : CityList,
-      Detail : WeatherDetailScreen,
-    },
-    {
-      initialRouteName: 'CityList',
-    }
-  
-);*/
-/*
+import Loginpage from './Loginpage';
+import Registerpage from './Registerpage';
+import Mainpage from './Mainpage';
+import CheckTab from './TabNavigator/CheckTab';
+import WaitTab from './TabNavigator/WaitTab';
+import RequestTab from './TabNavigator/RequestTab';
+import IdleTab from './TabNavigator/IdleTab';
+import OngoingTab from './TabNavigator/OngoingTab';
+import CarCheckTab from './TabNavigator/CarCheckTab';
+
 const AppNavigator = createStackNavigator(
   {
     Loginpage : Loginpage,
-    Detail : Mainpage,
+    Registerpage : Registerpage,
+    Mainpage : Mainpage,
+    WaitTab : WaitTab,
+    RequestTab : RequestTab,
+    CheckTab :  CheckTab,
+    IdleTab : IdleTab,
+    OngoingTab : OngoingTab,
+    CarCheckTab : CarCheckTab
   },
   {
-    initialRouteName: 'Loginpage',
+    initialRouteName: 'RequestTab',
   }
 
-);*/
-
-class EventPractice extends Component {
-
-  state = {
-    message: ''
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>이벤트 연습</h1>
-        <input 
-          type="text"
-          name="message"
-          placeholder="아무거나 입력해보세요"
-          value={this.state.message}
-          onChange={
-            (e) => {
-              this.setState({
-                message: e.target.value
-              })
-            }
-          }
-        />
-      </div>
-    );
-  }
-}
-
-//export default createAppContainer(AppNavigator);
+);
+export default createAppContainer(AppNavigator);
 
 
