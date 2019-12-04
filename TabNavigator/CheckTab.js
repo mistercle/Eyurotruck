@@ -3,6 +3,7 @@ import { FlatList, View, Text, TouchableOpacity, TextInput, StyleSheet} from "re
 import { Constants } from 'expo'
 
 export default class CheckTab extends React.Component {
+    //화물주 전용
     static navigationOptions = {
         title : '내 화물 정보 확인 화면',
       };

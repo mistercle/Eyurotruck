@@ -10,6 +10,7 @@ import {
 import soundfile from '../resource/sound/warning_errer.mp3'
 
 export default class CarCheckTab extends React.Component {
+    //운전자 전용
     static navigationOptions = {
         title : '의뢰 대기 화면',
       };

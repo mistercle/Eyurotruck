@@ -101,7 +101,7 @@ export default class RequestTab extends React.Component {
         return (
           
           <MapView 
-            style={styles.map} 
+            style={{ flex: 1 }} 
             initialRegion={{
               latitude: 37.392835,
               longitude: 127.111996, 
@@ -134,12 +134,6 @@ const styles = StyleSheet.create({
     },
     submitButtonText: {
       color: "white"
-    },
-    map : {
-      padding : 10,
-      width : 390,
-      height : 390
     }
     
-
   });
