@@ -13,6 +13,7 @@ import OngoingTab from './TabNavigator/OngoingTab';
 import CarCheckTab from './TabNavigator/CarCheckTab';
 import RequestStep2 from './TabNavigator/RequestStep2';
 import RequestStep3 from './TabNavigator/RequestStep3';
+import CheckInfo from './TabNavigator/CheckInfo';
 
 const AppNavigator = createStackNavigator(
   {
@@ -27,9 +28,10 @@ const AppNavigator = createStackNavigator(
     CarCheckTab : CarCheckTab,
     RequestStep2 : RequestStep2,
     RequestStep3 : RequestStep3,
+    CheckInfo : CheckInfo
   },
   {
-    initialRouteName: 'Loginpage',
+    initialRouteName: 'CheckInfo',
   }
 
 );

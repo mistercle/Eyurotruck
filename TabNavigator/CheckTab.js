@@ -17,8 +17,8 @@ export default class CheckTab extends React.Component {
             orderID : "12345",
             driverID : "54321",
             orderType : "1",
-            lat : "133",
-            lng : "25"
+            content_lat : "133",
+            content_lng : "25"
         },
         orderlist : []
         
@@ -30,14 +30,18 @@ export default class CheckTab extends React.Component {
     componentDidMount() {
         const { navigation } = this.props;
         this.state.company_id = navigation.getParam('customerID', null);
+        getOrderlist();
     }
 
     showInfo(order) {
-        alert("orderID : " + order.orderID +
-              "\ndriverID : " + order.driverID +
-              "\norderType : " + order.orderType +
-              "\nlat : " + order.lat +
-              "\nlng : " + order.lng);
+        this.props.navigation.navigate(
+            'CheckInfo',
+            {
+                content_lat : order.content_lat,
+                content_lng : order.content_lng,
+                orderType : order.orderType
+            }
+        )
     }
     getOrderlist()
     {
