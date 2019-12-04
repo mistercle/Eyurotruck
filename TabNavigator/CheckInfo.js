@@ -9,7 +9,7 @@ import {
 
 import MapView, { Marker } from 'react-native-maps';
 
-export default class RequestTab extends Component {
+export default class CheckInfo extends Component {
   
   static navigationOptions = {
     title : '내 화물 정보',

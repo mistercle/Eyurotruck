@@ -1,7 +1,5 @@
 import React from 'react';
-//import CityList from './CityList'
-import { createStackNavigator, createAppContainer, TabRouter } from 'react-navigation'
-//import WeatherDetailScreen from './WeatherDetailScreen'
+import { createStackNavigator, createAppContainer} from 'react-navigation'
 import Loginpage from './Loginpage';
 import Registerpage from './Registerpage';
 import Mainpage from './Mainpage';
@@ -31,7 +29,7 @@ const AppNavigator = createStackNavigator(
     CheckInfo : CheckInfo
   },
   {
-    initialRouteName: 'CheckInfo',
+    initialRouteName: 'Mainpage',
   }
 
 );

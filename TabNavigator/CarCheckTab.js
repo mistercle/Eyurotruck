@@ -17,29 +17,32 @@ export default class CarCheckTab extends React.Component {
     constructor(props) {
         super(props); 
         this.checkCargo = this.checkCargo.bind(this)
-        
-    this.state = {
-        driver_id : "",
-        prev_speed : 0,
-        prev_weight : 0,
-        prev_paret : 0,
-        current_speed : 0,
-        current_weight : 0,
-        current_paret : 0,
-        alert_weight : 0,//-1이면 무게에서 문제가 생긴것
-        alert_paret : 0,//-1이면 파레트에서 문제가 생긴것
-        temp : 1
-    }
+        this.interval = setInterval(this.checkCargo, 5000);
+        this.state = {
+            driver_id : "",
+            prev_speed : 0,
+            prev_weight : 0,
+            prev_paret : 0,
+            current_speed : 0,
+            current_weight : 0,
+            current_paret : 0,
+        }
 
     };
 //    audio = new Audio(soundfile)
 
+    server = `http://192.168.25.220:3000`
+
     componentDidMount() {
         const { navigation } = this.props;
         this.state.driver_id = navigation.getParam('customerID', null);
-        setInterval(this.checkCargo, 5000); // 5초마다 화물 체크 반복
+        //this.inter = setInterval(this.checkCargo, 5000); // 5초마다 화물 체크 반복
       }
 
+
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
     checkweight()//문제없으면 0 반환
     {
         if(this.state.current_speed > 10)
@@ -125,14 +128,15 @@ export default class CarCheckTab extends React.Component {
 
     }
 
-    
+    back(){
+    }
 
 
 
       render() {
         return (
           <View>
-            <TouchableOpacity style={styles.submitButton} onPress = {this.props.navigation.goBack()}>
+            <TouchableOpacity style={styles.submitButton} onPress = {this.back()}>
                 <Text style={styles.submitButtonText}>뒤로</Text>      
             </TouchableOpacity>
           </View>

@@ -13,18 +13,22 @@ export default class WaitTab extends React.Component{
       };
     constructor(props) {
         super(props); 
+        this.state = {
+          driver_id : "",
+          delivery_id : 3,
+          prev_speed : 0,
+          prev_weight : 0,
+          prev_paret : 0,
+          current_speed : 0,
+          current_weight : 0,
+          current_paret : 0,
+        }
+        this.checkCargo = this.checkCargo.bind(this)
+        this.checkCargo();
+        this.interval = setInterval(this.checkCargo, 5000); // 5초마다 화물 체크 반복
     };
 
-    state = {
-        driver_id : "",
-        delivery_id : 3,
-        prev_speed : 0,
-        prev_weight : 0,
-        prev_paret : 0,
-        current_speed : 0,
-        current_weight : 0,
-        current_paret : 0,
-    }
+    
 
     server = `http://192.168.25.220:3000`
 
@@ -32,7 +36,10 @@ export default class WaitTab extends React.Component{
         const { navigation } = this.props;
         this.state.driver_id = navigation.getParam('driver_id', null);
         this.state.delivery_id = navigation.getParam('delivery_id', null);
-        setInterval(this.checkCargo, 5000); // 5초마다 화물 체크 반복
+    }
+
+    componentWillUnmount(){
+      clearInterval(this.interval)
     }
 
     checkweight()//문제없으면 0 반환

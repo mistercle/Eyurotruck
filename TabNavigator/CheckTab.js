@@ -20,17 +20,20 @@ export default class CheckTab extends React.Component {
             content_lat : "133",
             content_lng : "25"
         },
-        orderlist : []
+        orderList : []
         
 
     
     }
     this.getOrderlist = this.getOrderlist.bind(this)
     };
+
+    server = `http://192.168.25.220:3000`
+
     componentDidMount() {
         const { navigation } = this.props;
         this.state.company_id = navigation.getParam('customerID', null);
-        getOrderlist();
+        this.getOrderlist();
     }
 
     showInfo(order) {
@@ -64,7 +67,7 @@ export default class CheckTab extends React.Component {
             <FlatList style = {styles.container}
                       renderItem = {({ item }) => this.renderList(item)}
                       keyExtractor = { item => item}
-                      data = { this.state.order}
+                      data = { this.state.orderList}
             />
         );
     }*/
