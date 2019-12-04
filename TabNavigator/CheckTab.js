@@ -9,9 +9,7 @@ export default class CheckTab extends React.Component {
       };
     constructor(props) {
         super(props); 
-        //console.log(props);
-        //console.log(this.props.title); 
-      };
+        
     state = {
         customerID : "",
         order :
@@ -26,6 +24,7 @@ export default class CheckTab extends React.Component {
 
     
     }
+      };
     componentDidMount() {
         const { navigation } = this.props;
         console.log("CheckTab : " + navigation.getParam('customerID', null))

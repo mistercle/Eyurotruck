@@ -11,6 +11,8 @@ import RequestTab from './TabNavigator/RequestTab';
 import IdleTab from './TabNavigator/IdleTab';
 import OngoingTab from './TabNavigator/OngoingTab';
 import CarCheckTab from './TabNavigator/CarCheckTab';
+import RequestStep2 from './TabNavigator/RequestStep2';
+import RequestStep3 from './TabNavigator/RequestStep3';
 
 const AppNavigator = createStackNavigator(
   {
@@ -22,7 +24,9 @@ const AppNavigator = createStackNavigator(
     CheckTab :  CheckTab,
     IdleTab : IdleTab,
     OngoingTab : OngoingTab,
-    CarCheckTab : CarCheckTab
+    CarCheckTab : CarCheckTab,
+    RequestStep2 : RequestStep2,
+    RequestStep3 : RequestStep3,
   },
   {
     initialRouteName: 'RequestTab',
