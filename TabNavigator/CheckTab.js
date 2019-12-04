@@ -10,8 +10,8 @@ export default class CheckTab extends React.Component {
     constructor(props) {
         super(props); 
         
-    state = {
-        customerID : "",
+    this.state = {
+        company_id : "",
         order :
         {
             orderID : "12345",
@@ -19,16 +19,17 @@ export default class CheckTab extends React.Component {
             orderType : "1",
             lat : "133",
             lng : "25"
-        }
+        },
+        orderlist : []
         
 
     
     }
-      };
+    this.getOrderlist = this.getOrderlist.bind(this)
+    };
     componentDidMount() {
         const { navigation } = this.props;
-        console.log("CheckTab : " + navigation.getParam('customerID', null))
-        this.state.customerID = navigation.getParam('customerID', null);
+        this.state.company_id = navigation.getParam('customerID', null);
     }
 
     showInfo(order) {
@@ -38,6 +39,13 @@ export default class CheckTab extends React.Component {
               "\nlat : " + order.lat +
               "\nlng : " + order.lng);
     }
+    getOrderlist()
+    {
+        fetch(this.server + `/check?company_id=${this.state.company_id}}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+
     /*
     renderList(order) {
         return (

@@ -17,8 +17,8 @@ export default class CarCheckTab extends React.Component {
     constructor(props) {
         super(props); 
         this.checkCargo = this.checkCargo.bind(this)
-    };
-    state = {
+        
+    this.state = {
         driver_id : "",
         prev_speed : 0,
         prev_weight : 0,
@@ -31,11 +31,13 @@ export default class CarCheckTab extends React.Component {
         temp : 1
     }
 
+    };
 //    audio = new Audio(soundfile)
 
     componentDidMount() {
-        // Now we need to make it run at a specified interval
-        setInterval(this.checkCargo, 5000); // runs every 3 seconds.
+        const { navigation } = this.props;
+        this.state.driver_id = navigation.getParam('customerID', null);
+        setInterval(this.checkCargo, 5000); // 5초마다 화물 체크 반복
       }
 
     checkweight()//문제없으면 0 반환
@@ -72,38 +74,15 @@ export default class CarCheckTab extends React.Component {
         this.state.prev_speed = this.state.current_speed;
         this.state.prev_weight = this.state.current_weight;
         this.state.prev_paret = this.state.current_paret;
-        /*
-        fetch(URL)
+        
+        fetch(this.server + `/check/car?driver_id=${this.state.driver_id}`)
         .then(res => res.json())
         .then(data => {
             this.state.current_speed = data.current_speed;
             this.state.current_weight = data.current_weight;
             this.state.current_paret = data.current_paret;
         })
-        */
-
-        if(this.state.temp%3 === 0)
-        {
-            this.state.current_speed = 30;
-            this.state.current_weight = 100;
-            this.state.current_paret = 4;
-        }
-
-        else if(this.state.temp%3 === 1)
-        {
-            this.state.current_speed = 30;
-            this.state.current_weight = 80;
-            this.state.current_paret = 4;
         
-        }
-
-        else
-        {
-            this.state.current_speed = 30;
-            this.state.current_weight = 100;
-            this.state.current_paret = 3;
-        }
-        this.state.temp = this.state.temp + 1
 
 
     }
@@ -153,8 +132,8 @@ export default class CarCheckTab extends React.Component {
       render() {
         return (
           <View>
-            <TouchableOpacity style={styles.submitButton}>
-                <Text style={styles.submitButtonText}>화물칸 체크중</Text>      
+            <TouchableOpacity style={styles.submitButton} onPress = {this.props.navigation.goBack()}>
+                <Text style={styles.submitButtonText}>뒤로</Text>      
             </TouchableOpacity>
           </View>
         );

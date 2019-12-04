@@ -60,6 +60,16 @@ class Mainpage extends React.Component{
         
     }
 
+    pushCarcheck = (ID) => {
+          this.props.navigation.navigate(
+              'CarCheckTab',
+              {
+                  customerID : this.state.customerID
+              }
+          )
+      
+    }
+
     render() {
         
         return (
@@ -69,6 +79,9 @@ class Mainpage extends React.Component{
         </TouchableOpacity>
         <TouchableOpacity style={styles.submitButton} onPress={() => this.pushCheck(this.state.customerID)}>
           <Text style={styles.submitButtonText}>화물 상태 확인</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.submitButton} onPress={() => this.pushCarcheck(this.state.customerID)}>
+          <Text style={styles.submitButtonText}>내 차 확인</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.submitButton} onPress={() => this.pushWait(this.state.customerID)}>
           <Text style={styles.submitButtonText}>화물 의뢰 대기</Text>

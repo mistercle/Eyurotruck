@@ -42,7 +42,6 @@ export default class WaitTab extends React.Component {
         const { navigation } = this.props;
         console.log("WaitTab : " + navigation.getParam('customerID', null))
         this.state.customerID = navigation.getParam('customerID', null);
-
     }
 
     

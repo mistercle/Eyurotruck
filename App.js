@@ -29,7 +29,7 @@ const AppNavigator = createStackNavigator(
     RequestStep3 : RequestStep3,
   },
   {
-    initialRouteName: 'RequestTab',
+    initialRouteName: 'Loginpage',
   }
 
 );

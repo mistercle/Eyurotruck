@@ -37,7 +37,7 @@ export default class WaitTab extends React.Component{
             pay : 0
 
         },
-        deliveryList : [
+        /*deliveryList : [
             {
                 orderid : "02495",
                 company_id : "mistercle",
@@ -78,7 +78,8 @@ export default class WaitTab extends React.Component{
                 paret_weight : 140,//화물 목적지의 경도
                 pay : 10000
             }
-        ]
+        ]*/
+        deliveryList : []
 
     }
 
@@ -87,11 +88,11 @@ export default class WaitTab extends React.Component{
     componentDidMount() {
         const { navigation } = this.props;
         this.state.customerID = navigation.getParam('customerID', null);
-        //this.setState({deliveryList : navigation.getParam('deliveryList', null)})
+        this.setState({deliveryList : navigation.getParam('deliveryList', null)})
     }
 
 
-    /*selectOrder = (driver_id, order) =>{
+    selectOrder = (driver_id, order) =>{
         const post = {
             delivery_id : order.delivery_id,
             driver_id : driver_id,
@@ -124,7 +125,7 @@ export default class WaitTab extends React.Component{
               delivery_id : order.delivery_id
           }
         );
-    }*/
+    }
 
 
 
