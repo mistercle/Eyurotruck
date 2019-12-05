@@ -26,7 +26,7 @@ export default class RequestTab extends React.Component {
         destination_lng : 0,
         
     }
-    server = `http://192.168.25.220:3000`
+    server = `http://uryotruck.ap-northeast-2.elasticbeanstalk.com`
 
     componentDidMount() {
         const { navigation } = this.props;
@@ -56,7 +56,7 @@ export default class RequestTab extends React.Component {
 
     request = post => {
         console.log(post);
-        /*
+        
         fetch(this.server + `/request`,{
         method :"POST",
         headers:{
@@ -77,7 +77,7 @@ export default class RequestTab extends React.Component {
                 alert("의뢰 업로드가 실패하였습니다. 다시 시도해주십시오");
             }
         })
-        */
+        
 
         this.props.navigation.goBack();
         

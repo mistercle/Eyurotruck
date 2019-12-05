@@ -97,7 +97,7 @@ export default class RequestSteb extends Component {
       style = {styles.submitButton}
       onPress = {() => this.request(this.state)}
       >
-        <Text style={styles.submitButtonText}>화물 의뢰</Text>
+        <Text style={styles.submitButtonText}>화물 목적지 확인</Text>
       </TouchableOpacity>
       </View>
 

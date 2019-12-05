@@ -28,7 +28,7 @@ export default class CheckTab extends React.Component {
     this.getOrderlist = this.getOrderlist.bind(this)
     };
 
-    server = `http://192.168.25.220:3000`
+    server = `http://uryotruck.ap-northeast-2.elasticbeanstalk.com`
 
     componentDidMount() {
         const { navigation } = this.props;
@@ -53,15 +53,15 @@ export default class CheckTab extends React.Component {
         .then(data => console.log(data))
     }
 
-    /*
+    
     renderList(order) {
         return (
             <TouchableOpacity style={styles.item} onPress = {() => this.showInfo(order)}>
                 <Text style={styles.text}>{order.orderID}</Text>
             </TouchableOpacity>
         );
-    }*/
-    /*
+    }
+    
     render() {
         return (
             <FlatList style = {styles.container}
@@ -70,15 +70,15 @@ export default class CheckTab extends React.Component {
                       data = { this.state.orderList}
             />
         );
-    }*/
-
+    }
+    /*
     render() {
         return (
             <TouchableOpacity style={styles.submitButton} onPress = {() => this.showInfo(this.state.order)}>
                 <Text style={styles.submitButtonText}>{this.state.order.orderID}</Text>
             </TouchableOpacity>
         )
-    }
+    }*/
 }
 
 const styles = StyleSheet.create({

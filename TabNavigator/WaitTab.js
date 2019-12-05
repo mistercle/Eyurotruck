@@ -16,8 +16,9 @@ export default class WaitTab extends React.Component {
       };
     state = {
         customerID : "",
-        lat : 0,
-        lng : 0,
+        now_lat : 0,
+        now_lng : 0,
+        
         order : {
           company_id : "",
           content_type : 0,//화물 유형 (냉동, 냉장, 상온)
@@ -36,7 +37,7 @@ export default class WaitTab extends React.Component {
         deliveryList : []
     }
 
-    server = `http://192.168.25.220:3000`
+    server = `http://uryotruck.ap-northeast-2.elasticbeanstalk.com`
 
     componentDidMount() {
         const { navigation } = this.props;
@@ -48,10 +49,11 @@ export default class WaitTab extends React.Component {
     wait_empty(state) {
       const post = {
         driver_id : this.state.customerID,
-        d1_lat : 0,
-        d1_lng : 0
+        d1_lat : 37.392835,
+        d1_lng : 127.111996
       }
-      fetch(this.server + `/request`)
+      console.log("Going IdleTab...")
+      fetch(this.server + `/request?driver_id=${driver_id}`)
       .then(result => result.json())
       .then(data => {
         console.log(data)
@@ -61,25 +63,14 @@ export default class WaitTab extends React.Component {
           'IdleTab',
           {
               customerID : state.customerID,
-              d1_lat : 0,
-              d1_lng : 0,
-              //order : this.state.order
+              d1_lat : 37.392835,
+              d1_lng : 127.111996,
               deliveryList : this.state.deliveryList
           }
         
       )})
 
       
-
-      /*this.props.navigation.replace(
-        'IdleTab',
-        {
-            customerID : state.customerID,
-            d1_lat : 0,
-            d1_lng : 0,
-            order : state.order//화물이 없음
-        }
-      )*/
     }
 
 

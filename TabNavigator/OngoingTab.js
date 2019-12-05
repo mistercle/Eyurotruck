@@ -30,7 +30,7 @@ export default class WaitTab extends React.Component{
 
     
 
-    server = `http://192.168.25.220:3000`
+    server = `http://uryotruck.ap-northeast-2.elasticbeanstalk.com`
 
     componentDidMount() {
         const { navigation } = this.props;

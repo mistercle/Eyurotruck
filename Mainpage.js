@@ -70,6 +70,10 @@ class Mainpage extends React.Component{
       
     }
 
+    pushLogout = (ID) =>{
+        this.props.navigation.goBack();
+    }
+
     render() {
         
         return (
@@ -85,6 +89,9 @@ class Mainpage extends React.Component{
         </TouchableOpacity>
         <TouchableOpacity style={styles.submitButton} onPress={() => this.pushWait(this.state.customerID)}>
           <Text style={styles.submitButtonText}>화물 의뢰 대기</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.submitButton} onPress={() => this.pushLogout(this.state.customerID)}>
+          <Text style={styles.submitButtonText}>로그아웃</Text>
         </TouchableOpacity>
         </View>
         );

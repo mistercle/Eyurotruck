@@ -19,6 +19,7 @@ class Registerpage extends React.Component {
         email: "",
         password: "",
         pNumber : "",
+        car_id : ""//자동차 아이디, 화물주는 입력 안해도됨
     }
 
 
@@ -33,17 +34,22 @@ class Registerpage extends React.Component {
     handlePhoneNumber = text => {
         this.setState({ pNumber: text });
     };
+    handleCarid = text => {
+      this.setState({ car_id : text });
+    };
 
-    register = (email, pass, pNumber) => {
+
+    register = (email, pass, pNumber, car_id) => {
         const post ={
             id: email,
             password: pass,
-            phone_number : pNumber
+            phone_number : pNumber,
+            car_id : car_id
         }
 
         console.log(post)
 
-        fetch(`http://192.168.25.220:3000/login`,{
+        fetch(`http://uryotruck.ap-northeast-2.elasticbeanstalk.com/login`,{
             method :'POST',
             headers: {
               Accept: 'application/json',
@@ -53,12 +59,12 @@ class Registerpage extends React.Component {
         })
         .then(function(data) {
           if(data === "success") {
-            alert("회원가입 성공")
+            //alert("회원가입 성공")
             
           }
           else
           {
-            alert("회원가입 실패")
+            //alert("회원가입 실패")
             
           }
        }).catch(function(error) {
@@ -98,9 +104,17 @@ class Registerpage extends React.Component {
               autoCapitalize="none"
               onChangeText={this.handlePhoneNumber}
             />
+            <TextInput
+              style={styles.input}
+              underlineColorAndroid="transparent"
+              placeholder="Car ID(선택사항)"
+              placeholderTextColor="#9a73ef"
+              autoCapitalize="none"
+              onChangeText={this.handleCarid}
+            />
             <TouchableOpacity
               style={styles.submitButton}
-              onPress={() => this.register(this.state.email, this.state.password, this.state.pNumber)}
+              onPress={() => this.register(this.state.email, this.state.password, this.state.pNumber, this.state.car_id)}
             >
               <Text style={styles.submitButtonText}>회원가입</Text>
             </TouchableOpacity>

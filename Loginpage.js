@@ -16,7 +16,7 @@ class Loginpage extends React.Component {
 
   
   
-  server = `http://192.168.25.220:3000`
+  server = `http://uryotruck.ap-northeast-2.elasticbeanstalk.com`
 
   handleEmail = text => {
     this.setState({ email: text });
@@ -39,7 +39,7 @@ class Loginpage extends React.Component {
         if(data === 1){
             this.state.customerID = this.state.email
             console.log("login : " + this.state.customerID)
-            this.props.navigation.replace(
+            this.props.navigation.navigate(
                 'Mainpage',
                 {
                     customerID : this.state.customerID

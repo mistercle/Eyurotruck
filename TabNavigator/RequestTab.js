@@ -93,7 +93,7 @@ export default class RequestTab extends Component {
       style = {styles.submitButton}
       onPress = {() => this.request(this.state)}
       >
-        <Text style={styles.submitButtonText}>화물 의뢰</Text>
+        <Text style={styles.submitButtonText}>화물 현재위치 확인</Text>
       </TouchableOpacity>
       </View>
     );

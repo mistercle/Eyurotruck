@@ -7,12 +7,10 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-import soundfile from '../resource/sound/warning_errer.mp3'
-
 export default class CarCheckTab extends React.Component {
     //운전자 전용
     static navigationOptions = {
-        title : '의뢰 대기 화면',
+        title : '내 차 상태 확인',
       };
     constructor(props) {
         super(props); 
@@ -23,15 +21,15 @@ export default class CarCheckTab extends React.Component {
             prev_speed : 0,
             prev_weight : 0,
             prev_paret : 0,
-            current_speed : 0,
-            current_weight : 0,
-            current_paret : 0,
+            current_speed : 1,
+            current_weight : 1,
+            current_paret : 1,
         }
 
     };
 //    audio = new Audio(soundfile)
 
-    server = `http://192.168.25.220:3000`
+    server = `http://uryotruck.ap-northeast-2.elasticbeanstalk.com`
 
     componentDidMount() {
         const { navigation } = this.props;
@@ -84,6 +82,8 @@ export default class CarCheckTab extends React.Component {
             this.state.current_speed = data.current_speed;
             this.state.current_weight = data.current_weight;
             this.state.current_paret = data.current_paret;
+            console.log("Recieved : ")
+            console.log(data)
         })
         
 
@@ -96,7 +96,7 @@ export default class CarCheckTab extends React.Component {
             paret_check : 0
         }
         this.dataget()
-        console.log("Data : ")
+        console.log("CheckCargo : ")
         console.log(this.state)
         if(this.state.current_speed > 10)//차가 움직일때
         {
@@ -129,6 +129,7 @@ export default class CarCheckTab extends React.Component {
     }
 
     back(){
+        this.props.navigation.goBack();
     }
 
 
@@ -136,7 +137,7 @@ export default class CarCheckTab extends React.Component {
       render() {
         return (
           <View>
-            <TouchableOpacity style={styles.submitButton} onPress = {this.back()}>
+            <TouchableOpacity style={styles.submitButton}>
                 <Text style={styles.submitButtonText}>뒤로</Text>      
             </TouchableOpacity>
           </View>

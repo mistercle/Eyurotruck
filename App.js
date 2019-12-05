@@ -29,7 +29,7 @@ const AppNavigator = createStackNavigator(
     CheckInfo : CheckInfo
   },
   {
-    initialRouteName: 'Mainpage',
+    initialRouteName: 'Loginpage',
   }
 
 );
