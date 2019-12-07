@@ -77,7 +77,7 @@ export default class WaitTab extends React.Component{
         this.state.prev_weight = this.state.current_weight;
         this.state.prev_paret = this.state.current_paret;
         
-        fetch(this.server + `/check?driver_id=${this.state.driver_id}`)
+        fetch(this.server + `/check/car?id=${this.state.driver_id}`)
         .then(res => res.json())
         .then(data => {
             this.state.current_speed = data.current_speed;

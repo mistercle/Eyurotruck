@@ -30,8 +30,8 @@ export default class CheckInfo extends Component {
     const { navigation } = this.props;
     this.setState({
         content_lat : navigation.getParam('content_lat', null),
-        content_lng : navigation.getParam('content_lat', null),
-        orderType : navigation.getParam('orderType', null),
+        content_lng : navigation.getParam('content_lng', null),
+        orderType : navigation.getParam('delivery_type', null),
         markers : [
             ...this.state.markers,
             {
@@ -60,7 +60,7 @@ export default class CheckInfo extends Component {
         return (
           <Marker {...marker} >
             <View style={styles.marker}>
-              <Text>뒤로</Text>
+              <Text>화물 위치</Text>
             </View>
           </Marker>
         )
@@ -70,7 +70,6 @@ export default class CheckInfo extends Component {
       
       <TouchableOpacity
       style = {styles.submitButton}
-      onPress = {this.props.navigation.goBack()}
       >
         <Text style={styles.submitButtonText}>뒤로</Text>
       </TouchableOpacity>
@@ -87,6 +86,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#550bbc",
     padding: 5,
     borderRadius: 5,
+  },
+  markertext: {
+    color : "#000",
+    fontWeight : "bold"
   },
   text: {
     color: "#FFF",

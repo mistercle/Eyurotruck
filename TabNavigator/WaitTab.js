@@ -53,7 +53,7 @@ export default class WaitTab extends React.Component {
         d1_lng : 127.111996
       }
       console.log("Going IdleTab...")
-      fetch(this.server + `/request?driver_id=${driver_id}`)
+      fetch(this.server + `/request?id=${post.driver_id}`)
       .then(result => result.json())
       .then(data => {
         console.log(data)

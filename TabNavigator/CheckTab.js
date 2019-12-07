@@ -12,14 +12,6 @@ export default class CheckTab extends React.Component {
         
     this.state = {
         company_id : "",
-        order :
-        {
-            orderID : "12345",
-            driverID : "54321",
-            orderType : "1",
-            content_lat : "133",
-            content_lng : "25"
-        },
         orderList : []
         
 
@@ -42,24 +34,31 @@ export default class CheckTab extends React.Component {
             {
                 content_lat : order.content_lat,
                 content_lng : order.content_lng,
-                orderType : order.orderType
+                orderType : order.delivery_type
             }
         )
     }
     getOrderlist()
     {
-        fetch(this.server + `/check?company_id=${this.state.company_id}}`)
+        fetch(this.server + `/check?company_id=${this.state.company_id}`)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            this.setState({orderList : data})
+            console.log("Data : \n" + orderlist)
+        })
     }
 
     
     renderList(order) {
-        return (
-            <TouchableOpacity style={styles.item} onPress = {() => this.showInfo(order)}>
-                <Text style={styles.text}>{order.orderID}</Text>
-            </TouchableOpacity>
-        );
+        if(order.delivery_type !== 2)
+        {
+            return (
+                <TouchableOpacity style={styles.submitButton} onPress = {() => this.showInfo(order)}>
+                        <Text style={styles.submitButtonText}>주문 번호 : {order.delivery_id}</Text>
+                        <Text style={styles.submitButtonText}>배송 상태 : {order.delivery_type}</Text>
+                </TouchableOpacity>
+            );
+        }
     }
     
     render() {
@@ -71,14 +70,6 @@ export default class CheckTab extends React.Component {
             />
         );
     }
-    /*
-    render() {
-        return (
-            <TouchableOpacity style={styles.submitButton} onPress = {() => this.showInfo(this.state.order)}>
-                <Text style={styles.submitButtonText}>{this.state.order.orderID}</Text>
-            </TouchableOpacity>
-        )
-    }*/
 }
 
 const styles = StyleSheet.create({

@@ -75,13 +75,13 @@ export default class CarCheckTab extends React.Component {
         this.state.prev_speed = this.state.current_speed;
         this.state.prev_weight = this.state.current_weight;
         this.state.prev_paret = this.state.current_paret;
-        
-        fetch(this.server + `/check/car?driver_id=${this.state.driver_id}`)
+        //`/test`)//
+        fetch(this.server + `/check/car?id=${this.state.driver_id}`)
         .then(res => res.json())
         .then(data => {
-            this.state.current_speed = data.current_speed;
-            this.state.current_weight = data.current_weight;
-            this.state.current_paret = data.current_paret;
+            this.state.current_speed = data.Velocity;
+            this.state.current_weight = data.Weight;
+            this.state.current_paret = data.Paret;
             console.log("Recieved : ")
             console.log(data)
         })
