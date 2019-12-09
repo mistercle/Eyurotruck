@@ -23,6 +23,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "package": "com.yourcompany.yourappname"
+    },
     "ios": {
       "supportsTablet": true
     }
