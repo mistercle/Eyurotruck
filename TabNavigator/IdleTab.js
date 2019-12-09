@@ -86,7 +86,7 @@ export default class WaitTab extends React.Component{
         .then(data => {
           direction.destination_dir = data.addressInfo.fullAddress
         })
-        /*
+        
         this.result({
           delivery_id : order.delivery_id,
           compnay_id : order.company_id,
@@ -98,8 +98,8 @@ export default class WaitTab extends React.Component{
           pay : order.pay 
           
         })
-        */
-
+        
+/*
         return (
             <TouchableOpacity style={styles.submitButton} onPress = {() => this.selectOrder(this.state.customerID, order)}>
                     <Text style={styles.submitButtonText}>주문 번호 : {order.delivery_id}</Text>
@@ -111,9 +111,9 @@ export default class WaitTab extends React.Component{
                     <Text style={styles.submitButtonText}>파레트 무게 : {order.paret_weight}</Text>
                     <Text style={styles.submitButtonText}>수당 : {order.pay}</Text>      
             </TouchableOpacity>
-        )
+        )*/
     }
-/*
+
     result(order)
     {
       return (
@@ -129,7 +129,7 @@ export default class WaitTab extends React.Component{
         </TouchableOpacity>
     )
     }
-*/
+
     render() {
         //현재 운전자 정보를 서버로 보낸다음 적절한 의뢰를 order안에 집어넣음
         

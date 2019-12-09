@@ -7,6 +7,8 @@ import {
   StyleSheet
 } from "react-native";
 
+import MapView, { Marker } from 'react-native-maps';
+
 export default class WaitTab extends React.Component{
     static navigationOptions = {
         title : '의뢰 수행중',
@@ -16,6 +18,8 @@ export default class WaitTab extends React.Component{
         this.state = {
           driver_id : "",
           delivery_id : 3,
+          car_lat : 0,
+          car_lng : 0,
           prev_speed : 0,
           prev_weight : 0,
           prev_paret : 0,
@@ -46,7 +50,7 @@ export default class WaitTab extends React.Component{
     {
         if(this.state.current_speed > 10)
         {
-            if(this.state.prev_weight - this.state.current_weight > 0)
+            if(this.state.prev_weight - this.state.current_weight < 0)
             {
                 console.log("화물 문제")
                 return -1;
@@ -80,6 +84,8 @@ export default class WaitTab extends React.Component{
         fetch(this.server + `/check/car?id=${this.state.driver_id}`)
         .then(res => res.json())
         .then(data => {
+            this.state.car_lat = data.Latitude
+            this.state.car_lng = data.Longitude
             this.state.current_speed = data.current_speed;
             this.state.current_weight = data.current_weight;
             this.state.current_paret = data.current_paret;
@@ -97,7 +103,7 @@ export default class WaitTab extends React.Component{
         this.dataget()
         console.log("Data : ")
         console.log(this.state)
-        if(this.state.current_speed > 10)//차가 움직일때
+        if(this.state.current_speed > 1)//차가 움직일때
         {
             if(!(this.checkweight() === 0))
                 checklist.weight_check = -1
@@ -151,7 +157,25 @@ export default class WaitTab extends React.Component{
         //현재 운전자 정보를 서버로 보낸다음 적절한 의뢰를 order안에 집어넣음
         
         return (
-            <View>
+                <View>
+                    <MapView 
+                    style={styles.map}
+                    region={{
+                        latitude: this.state.car_lat,
+                        longitude: this.state.car_lng,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                    >
+                    <MapView.Marker
+                        coordinate = {
+                            {
+                                latitude : this.state.car_lat,
+                                longitude : this.state.car_lng
+                            }
+                        }
+                    />
+                </MapView>
                 <TouchableOpacity
                 style={styles.submitButton}
                 onPress={() => this.finish()}

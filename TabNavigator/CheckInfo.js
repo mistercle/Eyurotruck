@@ -56,15 +56,14 @@ export default class CheckInfo extends Component {
             longitudeDelta: 0.0421,
           }}
       >
-      {this.state.markers.map((marker) => {
-        return (
-          <Marker {...marker} >
-            <View style={styles.marker}>
-              <Text>화물 위치</Text>
-            </View>
-          </Marker>
-        )
-      })}
+      <MapView.Marker
+        coordinate = {
+          {
+            latitude : this.state.content_lat,
+            longitude : this.state.content_lng
+          }
+        }
+      />
       
       </MapView>
       

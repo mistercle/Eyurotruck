@@ -29,22 +29,43 @@ export default class CheckTab extends React.Component {
     }
 
     showInfo(order) {
-        this.props.navigation.navigate(
-            'CheckInfo',
-            {
-                content_lat : order.content_lat,
-                content_lng : order.content_lng,
-                orderType : order.delivery_type
-            }
-        )
+        if(order.delivery_type === 0)//아직 화물이 대기중일때
+        {
+            console.log("화물이 대기중")
+            this.props.navigation.navigate(
+                'CheckInfo',
+                {
+                    content_lat : order.content_lat,
+                    content_lng : order.content_lng,
+                    orderType : order.delivery_type
+                }
+            )
+        }
+        else if(order.delivery_type === 1)//화물이 운송중일때
+        {
+            console.log("화물이 운반중")
+            fetch(this.server + `/check/car?id=${order.driver_id}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("Recieved : \n" + data + "\nEnd")
+                this.props.navigation.navigate(
+                    'CheckInfo',
+                    {
+                        content_lat : data.Latitude,
+                        content_lng : data.Longitude,
+                        orderType : order.delivery_type
+                    }
+                )
+            })
+        }
     }
     getOrderlist()
     {
         fetch(this.server + `/check?company_id=${this.state.company_id}`)
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             this.setState({orderList : data})
-            console.log("Data : \n" + orderlist)
         })
     }
 

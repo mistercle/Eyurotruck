@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 import MapView, { Marker } from 'react-native-maps';
@@ -43,7 +43,6 @@ export default class RequestTab extends Component {
         ...this.state.markers,
         {
           coordinate: e.nativeEvent.coordinate,
-          cost: `$${getRandomInt(50, 300)}`
         }
       ],
       lat : e.nativeEvent.coordinate.latitude,

@@ -58,7 +58,6 @@ export default class WaitTab extends React.Component {
       .then(data => {
         console.log(data)
         this.setState({deliveryList : data})
-        console.log(this.state.deliveryList)
         this.props.navigation.replace(
           'IdleTab',
           {

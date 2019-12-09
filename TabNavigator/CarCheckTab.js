@@ -7,6 +7,8 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
+import MapView, { Marker } from 'react-native-maps';
+
 export default class CarCheckTab extends React.Component {
     //운전자 전용
     static navigationOptions = {
@@ -18,6 +20,8 @@ export default class CarCheckTab extends React.Component {
         this.interval = setInterval(this.checkCargo, 5000);
         this.state = {
             driver_id : "",
+            car_lat : 37.392835,
+            car_lng : 127.111996,
             prev_speed : 0,
             prev_weight : 0,
             prev_paret : 0,
@@ -43,9 +47,9 @@ export default class CarCheckTab extends React.Component {
     }
     checkweight()//문제없으면 0 반환
     {
-        if(this.state.current_speed > 10)
+        if(this.state.current_speed > 1)
         {
-            if(this.state.prev_weight - this.state.current_weight > 0)
+            if(this.state.prev_weight - this.state.current_weight < 0)
             {
                 console.log("화물 문제")
                 return -1;
@@ -57,7 +61,7 @@ export default class CarCheckTab extends React.Component {
 
     checkparet()//문제없으면 0 반환
     {
-        if(this.state.current_speed > 10)
+        if(this.state.current_speed > 1)
         {
             if(this.state.prev_paret - this.state.current_paret > 0)
             {
@@ -79,6 +83,8 @@ export default class CarCheckTab extends React.Component {
         fetch(this.server + `/check/car?id=${this.state.driver_id}`)
         .then(res => res.json())
         .then(data => {
+            this.state.car_lat = data.Latitude
+            this.state.car_lng = data.Longitude
             this.state.current_speed = data.Velocity;
             this.state.current_weight = data.Weight;
             this.state.current_paret = data.Paret;
@@ -98,7 +104,7 @@ export default class CarCheckTab extends React.Component {
         this.dataget()
         console.log("CheckCargo : ")
         console.log(this.state)
-        if(this.state.current_speed > 10)//차가 움직일때
+        if(this.state.current_speed > 1)//차가 움직일때
         {
             if(!(this.checkweight() === 0))
                 checklist.weight_check = -1
@@ -129,7 +135,7 @@ export default class CarCheckTab extends React.Component {
     }
 
     back(){
-        this.props.navigation.goBack();
+       // this.props.navigation.goBack();
     }
 
 
@@ -137,6 +143,7 @@ export default class CarCheckTab extends React.Component {
       render() {
         return (
           <View>
+                    
             <TouchableOpacity style={styles.submitButton}>
                 <Text style={styles.submitButtonText}>뒤로</Text>      
             </TouchableOpacity>
