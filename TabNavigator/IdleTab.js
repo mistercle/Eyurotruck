@@ -75,6 +75,7 @@ export default class WaitTab extends React.Component{
         const direction = {
           content_dir : "",
           destination_dir : "",
+          isloading : 0
         }
         fetch(`https://apis.openapi.sk.com/tmap/geo/reversegeocoding?version=1&lat=${order.content_lat}&lon=${order.content_lng}&appKey=c260c6c2-728d-4a06-a2ee-fc3670401343`)
         .then(res => res.json())
@@ -85,8 +86,9 @@ export default class WaitTab extends React.Component{
         .then(res => res.json())
         .then(data => {
           direction.destination_dir = data.addressInfo.fullAddress
+          direction.isloading = 1;
         })
-        
+        /*
         this.result({
           delivery_id : order.delivery_id,
           compnay_id : order.company_id,
@@ -98,20 +100,22 @@ export default class WaitTab extends React.Component{
           pay : order.pay 
           
         })
-        
-/*
+        */
         return (
             <TouchableOpacity style={styles.submitButton} onPress = {() => this.selectOrder(this.state.customerID, order)}>
                     <Text style={styles.submitButtonText}>주문 번호 : {order.delivery_id}</Text>
                     <Text style={styles.submitButtonText}>기업 번호 : {order.company_id}</Text>
                     <Text style={styles.submitButtonText}>화물 유형 : {order.content_type}</Text>
-                    <Text style={styles.submitButtonText}>화물 위치 : {direction.content_dir}</Text>
-                    <Text style={styles.submitButtonText}>목적지 : {direction.destination_dir}</Text>
+                    <Text style={styles.submitButtonText}>목적지 : 경도 = {order.destination_lat}, 위도 = {order.destination_lng}</Text>
+                    <Text style={styles.submitButtonText}>화물위치 : 경도 = {order.content_lat}, 위도 = {order.content_lng}</Text>
+                   
+                   
                     <Text style={styles.submitButtonText}>파레트 갯수 : {order.paret_count}</Text>
                     <Text style={styles.submitButtonText}>파레트 무게 : {order.paret_weight}</Text>
                     <Text style={styles.submitButtonText}>수당 : {order.pay}</Text>      
             </TouchableOpacity>
-        )*/
+        )
+        
     }
 
     result(order)

@@ -16,12 +16,10 @@ export default class CarCheckTab extends React.Component {
       };
     constructor(props) {
         super(props); 
-        this.checkCargo = this.checkCargo.bind(this)
-        this.interval = setInterval(this.checkCargo, 5000);
         this.state = {
             driver_id : "",
-            car_lat : 37.392835,
-            car_lng : 127.111996,
+            car_lat : 0,
+            car_lng : 0,
             prev_speed : 0,
             prev_weight : 0,
             prev_paret : 0,
@@ -29,6 +27,10 @@ export default class CarCheckTab extends React.Component {
             current_weight : 1,
             current_paret : 1,
         }
+        
+        this.checkCargo = this.checkCargo.bind(this)
+        //this.checkCargo();
+        this.interval = setInterval(this.checkCargo, 5000);
 
     };
 //    audio = new Audio(soundfile)
@@ -47,7 +49,8 @@ export default class CarCheckTab extends React.Component {
     }
     checkweight()//문제없으면 0 반환
     {
-        if(this.state.current_speed > 1)
+        console.log("화물 무게 체크")
+        if(1)
         {
             if(this.state.prev_weight - this.state.current_weight < 0)
             {
@@ -61,9 +64,10 @@ export default class CarCheckTab extends React.Component {
 
     checkparet()//문제없으면 0 반환
     {
-        if(this.state.current_speed > 1)
+        console.log("파레트 체크")
+        if(1)
         {
-            if(this.state.prev_paret - this.state.current_paret > 0)
+            if(this.state.prev_paret - this.state.current_paret < 0)
             {
                 console.log("파레트 문제")
                 return -1;
@@ -79,15 +83,20 @@ export default class CarCheckTab extends React.Component {
         this.state.prev_speed = this.state.current_speed;
         this.state.prev_weight = this.state.current_weight;
         this.state.prev_paret = this.state.current_paret;
-        //`/test`)//
+
         fetch(this.server + `/check/car?id=${this.state.driver_id}`)
         .then(res => res.json())
         .then(data => {
-            this.state.car_lat = data.Latitude
-            this.state.car_lng = data.Longitude
-            this.state.current_speed = data.Velocity;
-            this.state.current_weight = data.Weight;
-            this.state.current_paret = data.Paret;
+            this.setState({
+                car_lat : data.Latitude,
+                car_lng : data.Longitude,
+                current_speed : data.Velocity,
+                current_weight : data.Weight,
+                current_paret : data.Paret
+            })
+            //this.state.current_speed = data.Velocity;
+            //this.state.current_weight = data.Weight;
+            //this.state.current_paret = data.Paret;
             console.log("Recieved : ")
             console.log(data)
         })
@@ -143,7 +152,24 @@ export default class CarCheckTab extends React.Component {
       render() {
         return (
           <View>
-                    
+                    <MapView 
+                    style={styles.map}
+                    region={{
+                        latitude: this.state.car_lat,
+                        longitude: this.state.car_lng,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                    >
+                    <MapView.Marker
+                        coordinate = {
+                            {
+                                latitude : this.state.car_lat,
+                                longitude : this.state.car_lng
+                            }
+                        }
+                    />
+                </MapView>
             <TouchableOpacity style={styles.submitButton}>
                 <Text style={styles.submitButtonText}>뒤로</Text>      
             </TouchableOpacity>
@@ -169,6 +195,11 @@ export default class CarCheckTab extends React.Component {
         },
         submitButtonText: {
           color: "white"
-        }
+        },
+        map : {
+            //marginTop : Constants.statusBarHeight,
+            width : 390,
+            height : 390
+          }
         
       });

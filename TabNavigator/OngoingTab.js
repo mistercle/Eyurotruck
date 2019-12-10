@@ -28,8 +28,8 @@ export default class WaitTab extends React.Component{
           current_paret : 0,
         }
         this.checkCargo = this.checkCargo.bind(this)
-        this.checkCargo();
-        this.interval = setInterval(this.checkCargo, 5000); // 5초마다 화물 체크 반복
+        //this.checkCargo();
+        this.interval = setInterval(this.checkCargo, 10000); // 5초마다 화물 체크 반복
     };
 
     
@@ -64,7 +64,7 @@ export default class WaitTab extends React.Component{
     {
         if(this.state.current_speed > 10)
         {
-            if(this.state.prev_paret - this.state.current_paret > 0)
+            if(this.state.prev_paret - this.state.current_paret < 0)
             {
                 console.log("파레트 문제")
                 return -1;
@@ -84,8 +84,10 @@ export default class WaitTab extends React.Component{
         fetch(this.server + `/check/car?id=${this.state.driver_id}`)
         .then(res => res.json())
         .then(data => {
-            this.state.car_lat = data.Latitude
-            this.state.car_lng = data.Longitude
+            this.setState({
+                car_lat : data.Latitude,
+                car_lng : data.Longitude
+            })
             this.state.current_speed = data.current_speed;
             this.state.current_weight = data.current_weight;
             this.state.current_paret = data.current_paret;
@@ -207,6 +209,11 @@ const styles = StyleSheet.create({
     },
     submitButtonText: {
       color: "white"
-    }
+    },
+    map : {
+        //marginTop : Constants.statusBarHeight,
+        width : 390,
+        height : 390
+      }
     
   });
