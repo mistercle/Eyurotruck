@@ -26,27 +26,25 @@ export default class CarCheckTab extends React.Component {
             current_speed : 1,
             current_weight : 1,
             current_paret : 1,
+            isLoading : 0
+            
         }
         
         this.checkCargo = this.checkCargo.bind(this)
-        //this.checkCargo();
         this.interval = setInterval(this.checkCargo, 5000);
 
     };
-//    audio = new Audio(soundfile)
-
     server = `http://uryotruck.ap-northeast-2.elasticbeanstalk.com`
 
     componentDidMount() {
         const { navigation } = this.props;
         this.state.driver_id = navigation.getParam('customerID', null);
-        //this.inter = setInterval(this.checkCargo, 5000); // 5초마다 화물 체크 반복
-      }
-
+    }
 
     componentWillUnmount(){
         clearInterval(this.interval)
     }
+
     checkweight()//문제없으면 0 반환
     {
         console.log("화물 무게 체크")
@@ -94,9 +92,6 @@ export default class CarCheckTab extends React.Component {
                 current_weight : data.Weight,
                 current_paret : data.Paret
             })
-            //this.state.current_speed = data.Velocity;
-            //this.state.current_weight = data.Weight;
-            //this.state.current_paret = data.Paret;
             console.log("Recieved : ")
             console.log(data)
         })
@@ -128,28 +123,18 @@ export default class CarCheckTab extends React.Component {
         if(checklist.paret_check === -1 && checklist.weight_check === -1)
         {
             alert("파레트와 화물 둘다 문제가 생겼습니다!!")
-            //this.audio.play()
         }
         else if(checklist.paret_check === -1 && checklist.weight_check === 0)
         {
             alert("파레트에 문제가 생겼습니다!!")
-            //this.audio.play()
         }    
         else if(checklist.paret_check === 0 && checklist.weight_check === -1)
         {
             alert("화물칸에 문제가 생겼습니다!!")
-            //this.audio.play()
         }
-
     }
 
-    back(){
-       // this.props.navigation.goBack();
-    }
-
-
-
-      render() {
+    render() {
         return (
           <View>
                     <MapView 
@@ -170,11 +155,10 @@ export default class CarCheckTab extends React.Component {
                         }
                     />
                 </MapView>
-            <TouchableOpacity style={styles.submitButton}>
-                <Text style={styles.submitButtonText}>뒤로</Text>      
-            </TouchableOpacity>
+                <Text>여유 파레트 갯수 : {this.state.current_paret}</Text>
+                <Text>여유 무게 : {this.state.current_weight}</Text>
           </View>
-        );
+        )
       }
     }
     const styles = StyleSheet.create({
@@ -184,11 +168,11 @@ export default class CarCheckTab extends React.Component {
         input: {
           margin: 15,
           height: 40,
-          borderColor: "#7a42f4",
+          borderColor: "#9aa9ff",
           borderWidth: 1
         },
         submitButton: {
-          backgroundColor: "#7a42f4",
+          backgroundColor: "#9aa9ff",
           padding: 10,
           margin: 15,
           height: 140
@@ -197,9 +181,14 @@ export default class CarCheckTab extends React.Component {
           color: "white"
         },
         map : {
-            //marginTop : Constants.statusBarHeight,
             width : 390,
             height : 390
-          }
+          },
+        infoText : {
+            color : "white",
+            borderColor: "#9aa9ff",
+            borderWidth: 1,
+            backgroundColor : "#9aa9ff"
+        }
         
       });

@@ -49,8 +49,6 @@ export default class WaitTab extends React.Component {
     wait_empty(state) {
       const post = {
         driver_id : this.state.customerID,
-        d1_lat : 37.392835,
-        d1_lng : 127.111996
       }
       console.log("Going IdleTab...")
       fetch(this.server + `/request?id=${post.driver_id}`)
@@ -62,8 +60,6 @@ export default class WaitTab extends React.Component {
           'IdleTab',
           {
               customerID : state.customerID,
-              d1_lat : 37.392835,
-              d1_lng : 127.111996,
               deliveryList : this.state.deliveryList
           }
         

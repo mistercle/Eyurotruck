@@ -28,7 +28,6 @@ export default class WaitTab extends React.Component{
           current_paret : 0,
         }
         this.checkCargo = this.checkCargo.bind(this)
-        //this.checkCargo();
         this.interval = setInterval(this.checkCargo, 10000); // 5초마다 화물 체크 반복
     };
 
@@ -86,11 +85,11 @@ export default class WaitTab extends React.Component{
         .then(data => {
             this.setState({
                 car_lat : data.Latitude,
-                car_lng : data.Longitude
+                car_lng : data.Longitude,
+                current_speed : data.Velocity,
+                current_weight : data.Weight,
+                current_paret : data.Paret
             })
-            this.state.current_speed = data.current_speed;
-            this.state.current_weight = data.current_weight;
-            this.state.current_paret = data.current_paret;
         })
         
 
@@ -178,8 +177,10 @@ export default class WaitTab extends React.Component{
                         }
                     />
                 </MapView>
+                <Text>여유 파레트 갯수 : {this.state.current_paret}</Text>
+                <Text>여유 무개 : {this.state.current_weight}</Text>
                 <TouchableOpacity
-                style={styles.submitButton}
+                style={styles.finishButton}
                 onPress={() => this.finish()}
                 >
                     <Text style={styles.submitButtonText}>화물 운송 완료</Text>
@@ -207,6 +208,12 @@ const styles = StyleSheet.create({
       margin: 15,
       height: 140
     },
+    finishButton: {
+        backgroundColor: "#9aa9ff",
+        padding: 10,
+        margin: 15,
+        height: 35
+      },
     submitButtonText: {
       color: "white"
     },

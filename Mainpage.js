@@ -6,19 +6,20 @@ import {
   TextInput,
   StyleSheet
 } from "react-native";
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
+
 
 class Mainpage extends React.Component{
   static navigationOptions = {
     title : '메인 페이지 화면',
   };
     constructor(props) {
-        super(props); 
+        super(props);
+        this.state = {
+                        customerID : ""
+  
+                    } 
       };
-    state = {
-        customerID : ""
-    
-    }
     component
     componentDidMount() {
         const { navigation } = this.props;

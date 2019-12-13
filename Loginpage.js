@@ -68,7 +68,7 @@ class Loginpage extends React.Component {
           style={styles.input}
           underlineColorAndroid="transparent"
           placeholder="Email"
-          placeholderTextColor="#9a73ef"
+          placeholderTextColor="#9aa9ff"
           autoCapitalize="none"
           onChangeText={this.handleEmail}
         />
@@ -76,7 +76,7 @@ class Loginpage extends React.Component {
           style={styles.input}
           underlineColorAndroid="transparent"
           placeholder="Password"
-          placeholderTextColor="#9a73ef"
+          placeholderTextColor="#9aa9ff"
           autoCapitalize="none"
           onChangeText={this.handlePassword}
         />
@@ -106,11 +106,11 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     height: 40,
-    borderColor: "#7a42f4",
+    borderColor: "#9aa9ff",
     borderWidth: 1
   },
   submitButton: {
-    backgroundColor: "#7a42f4",
+    backgroundColor: "#9aa9ff",
     padding: 10,
     margin: 15,
     height: 40
