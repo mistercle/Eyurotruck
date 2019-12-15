@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   marker: {
-    backgroundColor: "#550bbc",
+    backgroundColor: "#9aa9ff",
     padding: 5,
     borderRadius: 5,
   },
@@ -121,11 +121,11 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     height: 40,
-    borderColor: "#7a42f4",
+    borderColor: "#9aa9ff",
     borderWidth: 1
   },
   submitButton: {
-    backgroundColor: "#7a42f4",
+    backgroundColor: "#9aa9ff",
     padding: 10,
     margin: 15,
     height: 40
